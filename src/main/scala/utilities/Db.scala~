@@ -48,7 +48,7 @@ object Db {
   
   def runSetup() {
 
-    val pimgJunq = ptToPt( "Pagent", "MacOficina-4", "MacOficina-4" )
+    val pimgJunq = ptToPt( "Pagent", "localhost", "localhost" )
     val atps = pimgJunq.agentTwistedPairs
 
     Db.termstore = Some(pimgJunq)
@@ -80,7 +80,7 @@ object Db {
     }
   }
   
-  def getLogs(agentSession: AgentSession): Option[mTT.Resource] = {
+  def getAgentLogs(agentSession: AgentSession): Option[mTT.Resource] = {
     Db.termstore.map(ts => {
       reset { ts.put( agentSession.clntSessRcvLbl, agentSession.getLogs ) }                                     // REMOVE THIS (mock agent logs)
       reset { for( e <- ts.get( agentSession.clntSessRcvLbl ) ) { setRsp( e ) } }

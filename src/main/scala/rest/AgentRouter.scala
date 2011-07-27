@@ -17,32 +17,37 @@ import java.util.UUID
 import CCLDSL._
 import PersistedMonadicTS._
 import com.biosimilarity.lift.lib.SpecialKURIDefaults._
+import mTT._
 
 class AgentRouter extends RequestRouter("/rest/agents") {
-  response.contentType("text/html")
-  
-  get(pr("/:uuid")) = {
-    'path := "/rest/agents/" + uri(1)
-    
-    ftl("innerTabs.ftl")
-  }
+  response.contentType("text/plain")
   
   get(pr("/:uuid/logs")) = {
-    'logItems := Db.getAgentLogs(session.getOrElse(uri(1), sendError(500)).asInstanceOf[AgentSession])
-    
-    ftl("logTab.ftl")
+    println("-----code: " + uri(1))
+    println(session.get(uri(1)) match {
+      case Some(r) => "FOUND SOMETHING: " + r.toString
+      case None => "OH, NOES! FOUND NOTHING!"
+    })
+    Db.getLogs(session.getOrElse(uri(1), sendError(500)).asInstanceOf[AgentSession]) match {
+      case Some(RBound(Some(Ground(json)),_)) => json
+      case None => "None"
+    }
   }
   
   get(pr("/:uuid/agents")) = {
-    'agents := Db.getAgents(session.getOrElse(uri(1), sendError(500)).asInstanceOf[AgentSession])
-    
-    ftl("agentsTab.ftl")
+    println("-----code: " + uri(1))
+    Db.getAgents(session.getOrElse(uri(1), sendError(500)).asInstanceOf[AgentSession]) match {
+      case Some(RBound(Some(Ground(json)),_)) => json
+      case None => "None"
+    }
   }
   
   get(pr("/:uuid/cnxns")) = {
-    'cnxns := Db.getCnxns(session.getOrElse(uri(1), sendError(500)).asInstanceOf[AgentSession])
-    
-    ftl("cnxnsTab.ftl")
+    println("-----code: " + uri(1))
+    Db.getCnxns(session.getOrElse(uri(1), sendError(500)).asInstanceOf[AgentSession]) match {
+      case Some(RBound(Some(Ground(json)),_)) => json
+      case None => "None"
+    }
   }
   
 }

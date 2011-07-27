@@ -8,17 +8,17 @@
   <artifactId>pagent</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>Simple Circumflex Application</name>
+  <name>Platform Agent</name>
 
   <properties>
     <port>8188</port>
     
     <scala.version>2.9.0-1</scala.version>
     
-    <cx.version>2.0.3</cx.version>
+    <cx.version>2.1</cx.version>
     <cx.router>org.munat.pagent.Main</cx.router>
     
-    <scala-plugin.version>2.15.0</scala-plugin.version>
+    <scala-plugin.version>2.15.2</scala-plugin.version>
     
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

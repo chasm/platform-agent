@@ -1,2 +1,2 @@
 [#ftl]
-<div id="cnxns">${cnxns.toString}</div>
+<div id="cnxns">${path}</div>

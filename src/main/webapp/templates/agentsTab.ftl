@@ -1,2 +1,5 @@
 [#ftl]
-<div id="agents">${agents.toString}</div>
+<div id="agents">${path}</div>
+<script type="text/javascript">
+  alert($('#agents').html());
+</script>
