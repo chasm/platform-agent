@@ -18,6 +18,8 @@
     <script type="text/javascript" src="/js/jquery.form.js"></script>
     <script type="text/javascript" src="/js/jquery.jqGrid.src.js"></script>
     <script type="text/javascript" src="/js/grid.locale-en.js"></script>
+    <script type="text/javascript" src="/js/knockout-1.2.1.js"></script>
+    <script type="text/javascript" src="/js/pure.js"></script>
     
     <script type="text/javascript">
       $(function() {

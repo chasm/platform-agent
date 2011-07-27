@@ -35,5 +35,5 @@ table#cnxns td {
 }
 
 table#cnxns td.agentURI {
-  display: none;
+  visibility: hidden;
 }

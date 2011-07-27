@@ -2,6 +2,7 @@ package org.munat.pagent
 
 import org.munat.pagent.rest._
 import org.munat.pagent.model._
+import org.munat.pagent.Helpers._
 
 import ru.circumflex._, core._, web._, freemarker._
 
@@ -14,6 +15,7 @@ import scala.util.continuations._
 import scala.concurrent.cpsops._
 import scala.concurrent.{Channel => Chan, _}
 import java.net.URI
+import java.io.File
 import java.util.UUID._
 import CCLDSL._
 import PersistedMonadicTS._
@@ -22,8 +24,44 @@ import mTT._
 
 class Main extends RequestRouter {
   val log = new Logger("org.munat.pagent")
+  response.contentType("text/html")
   
   get("/") = ftl("index.ftl")
+  
+  get("/test") = {
+    response.contentType("text/plain")
+    
+    var f = new java.io.File("src/main/resources/pagent.properties")
+    f.isFile().toString()
+  }
+  
+  get(pr("/:uuid")) = {
+    'uuid := uri(1)
+    
+    ftl("innerTabs.ftl")
+  }
+  
+  get(pr("/logs/:uuid")) = {
+    'path := "/rest/agents/" + uri(1) + "/logs"
+    
+    ftl("logTab.ftl")
+  }
+  
+  get(pr("/agents/:uuid")) = {
+    'path := "/rest/agents/" + uri(1) + "/agents"
+    'json := Db.getAgents(session.getOrElse(uri(1), sendError(500)).asInstanceOf[AgentSession]) match {
+      case Some(RBound(Some(Ground(json)),_)) => json
+      case None => "[]"
+    }
+    
+    ftl("agentsTab.ftl")
+  }
+  
+  get(pr("/cnxns/:uuid")) = {
+    'path := "/rest/agents/" + uri(1) + "/cnxns"
+    
+    ftl("cnxnsTab.ftl")
+  }
   
   post("/") = {
     response.contentType("application/json")
@@ -70,8 +108,6 @@ class Main extends RequestRouter {
     }
   }
   
-  new ConnectionRouter
-  new LogItemRouter
   new AgentRouter
 
 }

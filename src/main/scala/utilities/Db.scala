@@ -48,7 +48,7 @@ object Db {
   
   def runSetup() {
 
-    val pimgJunq = ptToPt( "Pagent", "MacOficina-4", "MacOficina-4" )
+    val pimgJunq = ptToPt( "Pagent", "localhost", "localhost" )
     val atps = pimgJunq.agentTwistedPairs
 
     Db.termstore = Some(pimgJunq)

@@ -31,7 +31,8 @@ class Main extends RequestRouter {
   get("/test") = {
     response.contentType("text/plain")
     
-    new java.io.File("src/main/resources/pagent.properties")
+    var f = new java.io.File("src/main/resources/pagent.properties")
+    f.isFile().toString()
   }
   
   get(pr("/:uuid")) = {
