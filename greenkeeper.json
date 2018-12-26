@@ -1,0 +1,10 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "src/main/webapp/public/js/dijit/package.json",
+        "src/main/webapp/public/js/dojo/package.json"
+      ]
+    }
+  }
+}
